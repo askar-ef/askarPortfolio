@@ -1,7 +1,3 @@
-@extends('auth.layouts')
-
-@section('content')
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +11,7 @@
             <div class="md:col-span-3 bg-white p-12 rounded-lg">
                 <!-- Baris pertama, digabung menjadi 1 div -->
                 <div class="text-center pb-6">
-                    <h1 class="text-4xl font-bold">Petra Edgar Minerva</h1>
+                    <h1 class="text-4xl font-bold">Daffa Askar Fathin</h1>
                     <h2 class="text-xl text-askar-200 pb-1">Software Engineering Student</h2>
                     <h3 class="text-md text-gray-500 pb-4">Yogyakarta, Indonesia.</h3>
                     <p class="text-md text-gray-400">
@@ -204,7 +200,13 @@
             <div class="col-span-3 flex bg-white p-10 rounded-lg">
                 <img src="" alt="">
             </div>
+                <form action="{{ route('logout') }}" method="GET">
+                    @csrf
+                    <button class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 font-bold py-2 px-4 rounded-full" type="submit">LOGOUT</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>
-@endsection
+
+
