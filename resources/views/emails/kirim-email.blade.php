@@ -22,8 +22,8 @@
                 @csrf
                 <div class="form-group">
                     <label for="name">Nama</label>
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Nama">
-                </div>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Nama" value="{{ $name }}">
+                </div>                
                 <div class="form-group my-3">
                     <label for="email">Email Tujuan</label>
                     <input type="email" class = "form-control" name="email" id="email" placeholder="Email Tujuan">

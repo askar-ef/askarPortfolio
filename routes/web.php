@@ -15,11 +15,12 @@ use App\Http\Controllers\SendEmailController;
 |
 */
 
-Route::get('/', function () {
-    return view('register');
-});
+// Route::get('/', function () {
+//     return view("register");
+// });
 
 Route::controller(LoginRegisterController::class)->group(function () {
+    Route::get("/", "register")->name("register");
     Route::get("/register", "register")->name("register");
     Route::post("/store", "store")->name("store");
     Route::get("/login", "login")->name("login");

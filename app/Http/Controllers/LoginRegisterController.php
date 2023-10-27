@@ -52,7 +52,7 @@ class LoginRegisterController extends Controller
         ]);
         if (Auth::attempt($cridentials)) {
             $request->session()->regenerate();
-            return redirect()->route("dashboard")->withSuccess("You have successfully logged in!");
+            return redirect()->route("kirim-email")->withSuccess("You have successfully logged in!");
         }
 
         return back()->withErrors([

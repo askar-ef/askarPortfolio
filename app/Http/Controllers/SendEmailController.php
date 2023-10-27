@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\SendMailJob;
 use App\Mail\SendEmail;
+use App\Jobs\SendMailJob;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class SendEmailController extends Controller
@@ -23,8 +24,10 @@ class SendEmailController extends Controller
 
     public function index()
     {
-        return view("emails.kirim-email");
+        $user = Auth::user();
+        return view("emails.kirim-email", ['name' => $user->name]);
     }
+
 
 
     public function store(Request $request)
