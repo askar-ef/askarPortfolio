@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginRegisterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SendEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,21 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('about');
-// });
-
-// Route::get('/home', function () {
-//     return view('home');
-// });
-
-// Route::get('/alter', function () {
-//     return view('alter');
-// });
-
-// Route::get('/about', function () {
-//     return view('about');
-// });
+Route::get('/', function () {
+    return view('register');
+});
 
 Route::controller(LoginRegisterController::class)->group(function () {
     Route::get("/register", "register")->name("register");
@@ -38,3 +27,6 @@ Route::controller(LoginRegisterController::class)->group(function () {
     Route::get("/dashboard", "dashboard")->name("dashboard");
     Route::get("/logout", "logout")->name("logout");
 });
+
+Route::get('/send-email', [SendEmailController::class, 'index'])->name('kirim-email');
+Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-email');
