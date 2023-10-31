@@ -37,7 +37,7 @@ class LoginRegisterController extends Controller
         $cridentials = $request->only("email", "password");
         Auth::attempt($cridentials);
         $request->session()->regenerate();
-        return redirect()->route('dashboard')->withSuccess("you have successfully registered and logged in!");
+        return redirect()->route('kirim-verif')->withSuccess("you have successfully registered and logged in!");
     }
     public function login()
     {

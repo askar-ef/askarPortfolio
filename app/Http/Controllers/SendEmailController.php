@@ -22,10 +22,36 @@ class SendEmailController extends Controller
     //     return "email berhasil dikirim";
     // }
 
+    public function sendVerif()
+    {
+        $user = Auth::user();
+        $email = $user->email;
+
+        $content = [
+            'name' => $user->name,
+            'subject' => 'Ini Subject Verif',
+            'body' => 'Selamat anda telah berhasil registrasi. Silahkan login kembali maka Anda akan melihat profil Askar'
+        ];
+        Mail::to($email)->send(new SendEmail($content));
+        return "email berhasil dikirim";
+    }
+
+    // public function sendVerif(Request $request)
+    // {
+    //     $data = $request->all();
+
+    //     $name = $data['name'];
+    //     $email = $data['email'];
+
+    //     Mail::to($email)->send(new SendEmail(['name' => $name, 'subject' => 'Pendaftaran Berhasil', 'body' => 'Selamat anda telah berhasil registrasi. Silahkan login kembali maka Anda akan melihat profil Askar']));
+    //     return "Email verifikasi berhasil dikirim";
+    // }
+
+
     public function index()
     {
         $user = Auth::user();
-        return view("emails.kirim-email", ['name' => $user->name]);
+        return view("emails.kirim-email", ['name' => $user->name], ['email' => $user->email]);
     }
 
 

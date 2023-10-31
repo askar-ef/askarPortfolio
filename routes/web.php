@@ -31,3 +31,4 @@ Route::controller(LoginRegisterController::class)->group(function () {
 
 Route::get('/send-email', [SendEmailController::class, 'index'])->name('kirim-email');
 Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-email');
+Route::get('/send-verif', [SendEmailController::class, 'sendVerif'])->name('kirim-verif');
