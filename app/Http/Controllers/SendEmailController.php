@@ -29,11 +29,13 @@ class SendEmailController extends Controller
 
         $content = [
             'name' => $user->name,
+            'email' => $user->email,
             'subject' => 'Ini Subject Verif',
             'body' => 'Selamat anda telah berhasil registrasi. Silahkan login kembali maka Anda akan melihat profil Askar'
         ];
         Mail::to($email)->send(new SendEmail($content));
-        return "email berhasil dikirim";
+        return redirect()->route('login')->with("Email verifikasi talh terkirim, silahkan login untuk masuk ke profil Askar");
+        // return "Email verifikasi talh terkirim, silahkan login untuk masuk ke profil Askar";
     }
 
     // public function sendVerif(Request $request)
