@@ -34,7 +34,7 @@ class SendEmailController extends Controller
             'body' => 'Selamat anda telah berhasil registrasi. Silahkan login kembali maka Anda akan melihat profil Askar'
         ];
         Mail::to($email)->send(new SendEmail($content));
-        return redirect()->route('login')->with("Email verifikasi talh terkirim, silahkan login untuk masuk ke profil Askar");
+        return view("auth.login");
         // return "Email verifikasi talh terkirim, silahkan login untuk masuk ke profil Askar";
     }
 
