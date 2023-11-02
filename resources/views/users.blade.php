@@ -20,7 +20,9 @@
             <!-- Tampilkan informasi pengguna lainnya sesuai kebutuhan -->
         </tr>
     </table> --}}
+@extends('auth.layouts')
 
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,3 +60,4 @@
         </table>
     </div>
 </body>
+@endsection
