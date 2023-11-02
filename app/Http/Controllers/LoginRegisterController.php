@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class LoginRegisterController extends Controller
 {
@@ -27,12 +28,22 @@ class LoginRegisterController extends Controller
         $request->validate([
             "name" => "required|string|max:250",
             "email" => "required|email|max:250|unique:users",
-            "password" => "required|min:8|confirmed"
+            "password" => "required|min:8|confirmed",
+            "photo" => "image|nullable|max:2000"
         ]);
+
+        if ($request->hasFile('photo')) {
+            $filenameWithExt = $request->file('photo')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            $filenameSimpan = $filename . '_' . time() . $extension;
+            $path = $request->file('photo')->storeAs('photos', $filenameSimpan);
+        }
         User::create([
             "name" => $request->name,
             "email" => $request->email,
-            "password" => Hash::make($request->password)
+            "password" => Hash::make($request->password),
+            'photo' => $path
         ]);
         $cridentials = $request->only("email", "password");
         Auth::attempt($cridentials);
@@ -60,16 +71,42 @@ class LoginRegisterController extends Controller
         ])->onlyInput("email");
     }
 
+    // public function dashboard()
+    // {
+    //     if (Auth::check()) {
+    //         return view("auth.dashboard");
+    //     }
+
+    //     return redirect()->route("login")->withErrors([
+    //         "email" => "please login to access the dashboard.",
+    //     ])->onlyInput("email");
+    // }
+
     public function dashboard()
     {
         if (Auth::check()) {
-            return view("auth.dashboard");
+            $user = Auth::user(); // Mengambil pengguna yang saat ini masuk
+            return view("users", compact('user'));
         }
 
         return redirect()->route("login")->withErrors([
-            "email" => "please login to access the dashboard.",
+            "email" => "Please login to access the dashboard.",
         ])->onlyInput("email");
     }
+
+
+    // public function showUser()
+    // {
+    //     $users = User::all(); // Mengambil semua pengguna
+    //     return view('users')->with('users', $users);
+    // }
+
+    public function showUser($id)
+    {
+        $user = User::find($id); // Mengambil pengguna berdasarkan ID
+        return view('user')->with('user', $user);
+    }
+
 
     public function logout(Request $request)
     {
