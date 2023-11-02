@@ -40,6 +40,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Photo</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,11 +50,15 @@
                     <td>
                         <div class="d-flex align-items-center justify-content-center">
                             @if ($user->photo)
-                                <img src="{{ asset('storage/' . $user->photo) }}" width="600" alt="User Photo">
+                                <img src="{{ asset('storage/' . $user->photo) }}" width="400" alt="User Photo">
                             @else
                                 No Photo Available
                             @endif
                         </div>
+                    </td>
+                    <td class="center-content">
+                        <a href="" class="btn btn-primary">Update Foto</a>
+                        <a href="" class="btn btn-danger">Hapus Foto Profil</a>
                     </td>
                 </tr>
             </tbody>
