@@ -36,6 +36,9 @@ Route::get('/send-verif', [SendEmailController::class, 'sendVerif'])->name('kiri
 
 // Route::get('/user', [SendEmailController::class, 'user'])->name('kirim-verif');
 Route::get('/user', [LoginRegisterController::class, 'showUser']);
+Route::post('/delete-photo', [LoginRegisterController::class, 'deletePhoto'])->name('delete-photo');
+Route::post('/edit-photo', [LoginRegisterController::class, 'editPhoto'])->name('edit');
+
 // Route::get('/user', function () {
 //     return view("users");
 // });

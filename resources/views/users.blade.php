@@ -57,8 +57,12 @@
                         </div>
                     </td>
                     <td class="center-content">
-                        <a href="" class="btn btn-primary">Update Foto</a>
-                        <a href="" class="btn btn-danger">Hapus Foto Profil</a>
+                            <a href="{{ route('edit', $user->id) }}" class="btn btn-primary">Edit</a>
+                        <form method="POST" action="{{ route('delete-photo') }}">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" class="btn btn-danger">Hapus Foto Profil</button>
+                        </form>
                     </td>
                 </tr>
             </tbody>
