@@ -26,11 +26,12 @@
                         <p>{{ $user->email }}</p>
                         <a href="{{ route('edit-photo', $user->id) }}" class="btn btn-primary">Edit Profile</a>
 
-                        <form method="POST" action="{{ route('delete-photo') }}" class="mt-3">
+                        <form method="POST" action="{{ route('delete-photo', $user->id) }}" class="mt-3">
                             @csrf
-                            @method('POST')
+                            @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete Profile Photo</button>
                         </form>
+                        
                     </div>
                 </div>
             </div>

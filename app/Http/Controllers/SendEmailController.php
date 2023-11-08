@@ -50,57 +50,6 @@ class SendEmailController extends Controller
 
 
 
-    public function updatePhoto(Request $request, $id)
-    {
-        $user = User::find($id);
-
-        $request->validate([
-            "photo" => "image|nullable|max:2000"
-        ]);
-
-        if ($request->hasFile('photo')) {
-            if ($user->photo) {
-                Storage::disk('public')->delete($user->photo);
-                Storage::disk('public')->delete('thumbnails/' . $user->photo);
-                Storage::disk('public')->delete('squares/' . $user->photo);
-            }
-
-            $image = $request->file('photo');
-            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-            $pathOriginal = 'photos/original/' . $filename;
-            $pathThumbnail = 'photos/thumbnails/' . $filename;
-            $pathSquare = 'photos/squares/' . $filename;
-
-            $image = Image::make($image);
-
-            // Simpan gambar asli
-            $image->save($pathOriginal);
-
-            // Simpan thumbnail (300x200)
-            $thumbnail = $image->fit(300, 200);
-            $thumbnail->save($pathThumbnail);
-
-            // Simpan square (150x150)
-            $square = $image->fit(150, 150);
-            $square->save($pathSquare);
-
-            // Perbarui path foto pada data pengguna
-            $user->photo = $filename;
-            $user->save();
-        }
-
-        return redirect()->route("dashboard")->withSuccess("Foto telah berhasil diperbarui!");
-    }
-
-
-
-    // public function store(Request $request)
-    // {
-    //     $data = $request->all();
-
-    //     dispatch(new SendMailJob($data));
-    //     return redirect()->route('kirim-email')->with('success', 'email berhasil dikirim');
-    // }
     // public function updatePhoto(Request $request, $id)
     // {
     //     $user = User::find($id);
@@ -118,25 +67,94 @@ class SendEmailController extends Controller
 
     //         $image = $request->file('photo');
     //         $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-    //         $path = $image->storeAs('photos/original', $filename, 'public');
+    //         $pathOriginal = 'photos/original/' . $filename;
+    //         $pathThumbnail = 'photos/thumbnails/' . $filename;
+    //         $pathSquare = 'photos/squares/' . $filename;
 
-    //         $this->createThumbnailAndSquare($image, $filename);
+    //         $image = Image::make($image);
 
-    //         $user->photo = $path;
+    //         // Simpan gambar asli
+    //         $image->save($pathOriginal);
+
+    //         // Simpan thumbnail (300x200)
+    //         $thumbnail = $image->fit(300, 200);
+    //         $thumbnail->save($pathThumbnail);
+
+    //         // Simpan square (150x150)
+    //         $square = $image->fit(150, 150);
+    //         $square->save($pathSquare);
+
+    //         // Perbarui path foto pada data pengguna
+    //         $user->photo = $filename;
     //         $user->save();
     //     }
 
     //     return redirect()->route("dashboard")->withSuccess("Foto telah berhasil diperbarui!");
     // }
 
-    // private function createThumbnailAndSquare($image, $filename)
-    // {
-    //     $thumbnail = Image::make($image)->fit(300, 200);
-    //     $square = Image::make($image)->fit(150, 150);
 
-    //     Storage::disk('public')->put('thumbnails/' . $filename, $thumbnail->stream());
-    //     Storage::disk('public')->put('squares/' . $filename, $square->stream());
-    // }
+    public function deletePhoto(Request $request, $id)
+    {
+        $user = User::find($id);
+        if ($user->photo) {
+            Storage::disk('public')->delete($user->photo);
+            Storage::disk('public')->delete('thumbnails/' . $user->photo);
+            Storage::disk('public')->delete('squares/' . $user->photo);
+
+            $user->photo = null;
+            $user->save();
+
+            return redirect()->route("dashboard")->withSuccess("Semua gambar telah dihapus dan nilai 'photo' diubah menjadi null.");
+        } else {
+            return redirect()->route("dashboard")->withSuccess("Tidak ada gambar yang harus dihapus.");
+        }
+    }
+
+
+
+    public function store(Request $request)
+    {
+        $data = $request->all();
+
+        dispatch(new SendMailJob($data));
+        return redirect()->route('kirim-email')->with('success', 'email berhasil dikirim');
+    }
+    public function updatePhoto(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $request->validate([
+            "photo" => "image|nullable|max:2000"
+        ]);
+
+        if ($request->hasFile('photo')) {
+            if ($user->photo) {
+                Storage::disk('public')->delete($user->photo);
+                Storage::disk('public')->delete('thumbnails/' . $user->photo);
+                Storage::disk('public')->delete('squares/' . $user->photo);
+            }
+
+            $image = $request->file('photo');
+            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('photos/original', $filename, 'public');
+
+            $this->createThumbnailAndSquare($image, $filename);
+
+            $user->photo = $path;
+            $user->save();
+        }
+
+        return redirect()->route("dashboard")->withSuccess("Foto telah berhasil diperbarui!");
+    }
+
+    private function createThumbnailAndSquare($image, $filename)
+    {
+        $thumbnail = Image::make($image)->fit(300, 200);
+        $square = Image::make($image)->fit(150, 150);
+
+        Storage::disk('public')->put('thumbnails/' . $filename, $thumbnail->stream());
+        Storage::disk('public')->put('squares/' . $filename, $square->stream());
+    }
 
 
     public function editPhoto($id)

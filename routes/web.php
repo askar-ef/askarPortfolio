@@ -41,6 +41,7 @@ Route::get('/pindah', [LoginRegisterController::class, 'pindah'])->name('pindah'
 
 Route::put('/update-photo/{id}', [SendEmailController::class, 'updatePhoto'])->name('update-photo');
 Route::get('/edit-photo/{id}', [SendEmailController::class, 'editPhoto'])->name('edit-photo');
+Route::delete('/delete-photo/{id}', [SendEmailController::class, 'deletePhoto'])->name('delete-photo');
 
 
 // Route::get('/user', function () {
