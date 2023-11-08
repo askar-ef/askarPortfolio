@@ -57,7 +57,8 @@
                         </div>
                     </td>
                     <td class="center-content">
-                            <a href="{{ route('edit', $user->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('edit-photo', $user->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('kirim-email') }}" class="btn btn-primary">Edit</a>
                         <form method="POST" action="{{ route('delete-photo') }}">
                             @csrf
                             @method('POST')

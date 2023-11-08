@@ -76,12 +76,12 @@ class LoginRegisterController extends Controller
             // Buat thumbnail (300x200)
             $thumbnail = Image::make($image);
             $thumbnail->fit(300, 200);
-            Storage::disk('local')->put('thumbnails/' . $filenameSimpan, (string) $thumbnail->encode());
+            Storage::disk('public')->put('thumbnails/' . $filenameSimpan, $thumbnail->stream());
 
             // Buat square (150x150)
             $square = Image::make($image);
             $square->fit(150, 150);
-            Storage::disk('local')->put('squares/' . $filenameSimpan, (string) $square->encode());
+            Storage::disk('public')->put('squares/' . $filenameSimpan, $square->stream());
         }
 
         User::create([
@@ -168,6 +168,54 @@ class LoginRegisterController extends Controller
     //             }
     //         }
 
+    public function updatePhoto(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $request->validate([
+            "photo" => "image|nullable|max:2000"
+        ]);
+
+        if ($request->hasFile('photo')) {
+            // Hapus foto yang ada sebelumnya
+            if ($user->photo) {
+                Storage::disk('public')->delete($user->photo);
+                Storage::disk('public')->delete('thumbnails/' . $user->photo);
+                Storage::disk('public')->delete('squares/' . $user->photo);
+            }
+
+            $image = $request->file('photo');
+            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+
+            $path = $image->storeAs('photos', $filename, 'public');
+
+            $this->createThumbnailAndSquare($image, $filename);
+
+            // Perbarui path foto pada data pengguna
+            $user->photo = $path;
+            $user->save();
+        }
+
+        return redirect()->back()->withSuccess("Foto telah berhasil diperbarui!");
+    }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+        return view('edit', ['user' => $user]);
+    }
+
+
+
+
+    private function createThumbnailAndSquare($image, $filename)
+    {
+        $thumbnail = Image::make($image)->fit(300, 200);
+        $square = Image::make($image)->fit(150, 150);
+
+        Storage::disk('public')->put('thumbnails/' . $filename, (string) $thumbnail->encode());
+        Storage::disk('public')->put('squares/' . $filename, (string) $square->encode());
+    }
 
     public function deletePhoto(User $user)
     {
