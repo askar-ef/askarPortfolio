@@ -1,25 +1,3 @@
-{{-- @foreach ($users as $user)
-    <p>{{ $user->name }}</p>
-    <p>{{ $user->email }}</p>
-    <img src="{{asset('storage/'.$user->photo )}}" width="150px">
-    <!-- Tampilkan informasi pengguna lainnya sesuai kebutuhan -->
-@endforeach --}}
-
-{{-- 
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Photo</th>
-            <!-- Tambahkan kolom lain sesuai kebutuhan -->
-        </tr>
-        <tr>
-            <td>{{ $user->name }}</td>
-            <td>{{ $user->email }}</td>
-            <td>{{ $user->photo }}</td>
-            <!-- Tampilkan informasi pengguna lainnya sesuai kebutuhan -->
-        </tr>
-    </table> --}}
 @extends('auth.layouts')
 
 @section('content')
@@ -34,40 +12,30 @@
 </head>
 <body>
     <div class="container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Photo</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>
-                        <div class="d-flex align-items-center justify-content-center">
-                            @if ($user->photo)
-                                <img src="{{ asset('storage/' . $user->photo) }}" width="400" alt="User Photo">
-                            @else
-                                No Photo Available
-                            @endif
-                        </div>
-                    </td>
-                    <td class="center-content">
-                            <a href="{{ route('edit-photo', $user->id) }}" class="btn btn-primary">Edit</a>
-                            <a href="{{ route('kirim-email') }}" class="btn btn-primary">Edit</a>
-                        <form method="POST" action="{{ route('delete-photo') }}">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body text-center">
+                        @if ($user->photo)
+                            <img src="{{ asset('storage/' . $user->photo) }}" class="img-fluid rounded-circle" alt="User Photo" width="200">
+                        @else
+                            <p>No Photo Available</p>
+                        @endif
+
+                        <h2 class="mt-3">{{ $user->name }}</h2>
+                        <p>{{ $user->email }}</p>
+                        <a href="{{ route('edit-photo', $user->id) }}" class="btn btn-primary">Edit Profile</a>
+
+                        <form method="POST" action="{{ route('delete-photo') }}" class="mt-3">
                             @csrf
                             @method('POST')
-                            <button type="submit" class="btn btn-danger">Hapus Foto Profil</button>
+                            <button type="submit" class="btn btn-danger">Delete Profile Photo</button>
                         </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
+</html>
 @endsection
