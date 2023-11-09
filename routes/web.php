@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginRegisterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\SendEmailController;
 
 /*
@@ -42,6 +43,9 @@ Route::get('/pindah', [LoginRegisterController::class, 'pindah'])->name('pindah'
 Route::put('/update-photo/{id}', [SendEmailController::class, 'updatePhoto'])->name('update-photo');
 Route::get('/edit-photo/{id}', [SendEmailController::class, 'editPhoto'])->name('edit-photo');
 Route::delete('/delete-photo/{id}', [SendEmailController::class, 'deletePhoto'])->name('delete-photo');
+
+
+Route::resource('gallery', GalleryController::class);
 
 
 // Route::get('/user', function () {
