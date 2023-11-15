@@ -30,24 +30,27 @@ Route::controller(LoginRegisterController::class)->group(function () {
     Route::get("/logout", "logout")->name("logout");
 });
 
-Route::get('/send-email', [SendEmailController::class, 'index'])->name('kirim-email');
-Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-email');
-Route::get('/send-verif', [SendEmailController::class, 'sendVerif'])->name('kirim-verif');
 
 Route::get('/user', [LoginRegisterController::class, 'showUser']);
 Route::post('/delete-photo', [LoginRegisterController::class, 'deletePhoto'])->name('delete-photo');
 Route::get('/update-photo/{id}', [LoginRegisterController::class, 'updatePhoto'])->name('update-photo');
 Route::get('/edit-photo/{id}', [LoginRegisterController::class, 'editPhoto'])->name('edit-photo');
-Route::get('/pindah', [LoginRegisterController::class, 'pindah'])->name('pindah');
 
-Route::put('/update-photo/{id}', [SendEmailController::class, 'updatePhoto'])->name('update-photo');
-Route::get('/edit-photo/{id}', [SendEmailController::class, 'editPhoto'])->name('edit-photo');
-Route::delete('/delete-photo/{id}', [SendEmailController::class, 'deletePhoto'])->name('delete-photo');
+// Route::get('/pindah', [LoginRegisterController::class, 'pindah'])->name('pindah');
 
+
+Route::controller(SendEmailController::class)->group(function () {
+    Route::get('/send-email', 'index')->name('kirim-email');
+    Route::post('/post-email', 'store')->name('post-email');
+    Route::get('/send-verif', 'sendVerif')->name('kirim-verif');
+    Route::put('/update-photo/{id}', 'updatePhoto')->name('update-photo');
+    Route::get('/edit-photo/{id}', 'editPhoto')->name('edit-photo');
+    Route::delete('/delete-photo/{id}', 'deletePhoto')->name('delete-photo');
+});
 
 Route::resource('gallery', GalleryController::class);
 
 
-// Route::get('/user', function () {
-//     return view("users");
-// });
+Route::get('/gallery/edit/{id}', [GalleryController::class, 'edit'])->name('gallery.edit');
+Route::post('/gallery/update/{id}', [GalleryController::class, 'update'])->name('gallery.update');
+Route::get('/destroy/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');

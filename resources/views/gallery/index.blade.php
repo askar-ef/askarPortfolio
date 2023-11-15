@@ -11,9 +11,12 @@
                         @foreach ($galleries as $gallery)
                         <div class="col-sm-2">
                             <div>
-                                <a class="example-image-link" href="{{$gallery->original_pict}}" data-lightbox="roadtrip" data-title="{{$gallery->description}}">
-                                    <img class="example-image img-fluid mb-2" src="{{asset('storage/posts_image/'.$gallery->picture )}}" alt="image-1" />
+                                <a class="example-image-link" href="{{asset('storage/posts_image/'.$gallery->picture)}}" data-lightbox="roadtrip" data-title="{{$gallery->description}}">
+                                    <img class="example-image img-fluid mb-2" src="{{asset('storage/posts_image/'.$gallery->picture)}}" alt="image-1" />
                                 </a>
+                                <a href="{{ route('gallery.edit', $gallery->id) }}" class="btn btn-warning btn-sm mt-2">EDIT</a>
+                                <a href="{{ route('gallery.destroy', $gallery->id) }}" class="btn btn-danger btn-sm mt-2">DELETE</a>
+                            </a>
                             </div>
                         </div>
                         @endforeach
@@ -25,9 +28,12 @@
                         </div>
                     </div>
                 </div>
+                    <a class="btn btn-primary mx-2 my-2" href="{{ route('gallery.create') }}">POST</a>
+                </div>
             </div>
         </div>
     </div>
+
 
 </body>
 @endsection

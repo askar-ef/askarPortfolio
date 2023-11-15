@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class GalleryController extends Controller
 {
@@ -80,15 +81,52 @@ class GalleryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $photos = Post::find($id);
+        return view('gallery.edit', compact('photos'));
     }
 
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'picture' => 'image|nullable|max:1999'
+        ]);
+
+        $photo = Post::find($id);
+        // dd($photo);
+        if ($request->hasFile('picture')) {
+            $filenameWithExt = $request->file('picture')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('picture')->getClientOriginalExtension();
+            $basename = uniqid() . time();
+            $smallFilename = "small_{$basename}.{$extension}";
+            $mediumFilename = "medium_{$basename}.{$extension}";
+            $largeFilename = "large_{$basename}.{$extension}";
+            $filenameSimpan = "{$basename}.{$extension}";
+            $originalPath = public_path('storage/posts_image/' . $photo->picture);
+            if (File::exists($originalPath)) {
+                File::delete($originalPath);
+            }
+
+            $path = $request->file('picture')->storeAs('posts_image', $filenameSimpan);
+            $photo->update([
+                'title'   => $request->title,
+                'description'   => $request->description,
+                'picture' => $filenameSimpan
+            ]);
+        } else {
+
+            $photo->update([
+                'title'   => $request->title,
+                'description'   => $request->description
+            ]);
+        }
+        return redirect()->route('gallery.index');
     }
 
     /**
@@ -96,6 +134,12 @@ class GalleryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $photo = Post::find($id);
+        $originalPath = public_path('storage/posts_image/' . $photo->picture);
+        if (File::exists($originalPath)) {
+            File::delete($originalPath);
+        }
+        $photo->delete();
+        return  redirect()->route('gallery.index');
     }
 }
