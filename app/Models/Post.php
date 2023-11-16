@@ -12,6 +12,5 @@ class Post extends Model
         'title',
         'description',
         'picture',
-        // Add other attributes here as needed
     ];
 }
