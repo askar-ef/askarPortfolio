@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\GreetController;
-use App\Http\Controllers\InfoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InfoController;
+use App\Http\Controllers\GreetController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\GalleryApiController;
 
 
 /*
@@ -23,3 +25,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/info', [InfoController::class, 'index'])->name('info');
 Route::get('/greet', [GreetController::class, 'greet'])->name('greet');
+Route::get('/gallery', [GalleryApiController::class, 'index'])->name('gallery.index');
+Route::post('/gallery', [GalleryController::class, 'store'])->name('gallery.store.api');

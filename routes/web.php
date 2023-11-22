@@ -50,7 +50,6 @@ Route::controller(SendEmailController::class)->group(function () {
 
 Route::resource('gallery', GalleryController::class);
 
-
 Route::get('/gallery/edit/{id}', [GalleryController::class, 'edit'])->name('gallery.edit');
 Route::post('/gallery/update/{id}', [GalleryController::class, 'update'])->name('gallery.update');
 Route::get('/destroy/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');

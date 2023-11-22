@@ -14,6 +14,98 @@
         "version": "0.0.1"
     },
     "paths": {
+        "/api/gallery": {
+            "get": {
+                "tags": [
+                    "Gallery"
+                ],
+                "summary": "Get all gallery items",
+                "description": "Get a list of all gallery items.",
+                "operationId": "getGalleryItems",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "photo": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Photo"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Gallery"
+                ],
+                "summary": "Create a new photo",
+                "description": "Create a new photo with title, description, and an optional picture.",
+                "operationId": "createPhoto",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "Photo title",
+                                        "type": "string",
+                                        "example": "Beautiful Sunset"
+                                    },
+                                    "description": {
+                                        "description": "Photo description",
+                                        "type": "string",
+                                        "example": "A breathtaking view of the sunset"
+                                    },
+                                    "picture": {
+                                        "description": "Photo file (optional)",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Photo created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil menambahkan data baru"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/api/greet": {
             "get": {
                 "tags": [
@@ -47,6 +139,35 @@
                         "description": "successful operation"
                     }
                 }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Photo": {
+                "required": [
+                    "id",
+                    "title",
+                    "description",
+                    "picture"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "picture": {
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
             }
         }
     }
