@@ -87,7 +87,7 @@
                 <div class="mask bg-cover" style="background-image: url('https://www.shutterstock.com/image-illustration/mediocrity-painful-human-condition-pictured-600nw-2036037419.jpg'); filter: grayscale(100%) brightness(70%); transition: filter 0.3s ease;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(70%)';"></div>
                 <p class="absolute bottom-0 left-0 pl-4 pb-56">Around 20 Interior Projects</p>
                 <p class="absolute bottom-0 left-0 pl-4 pb-52">22</p>
-                <p class="absolute bottom-0 right-0 pr-2 pb-2">Lead Interior Designer</p>
+                <p class="absolute bottom-0 right-0 pr-2 pb-2">Lead Interior Designe</p>
             </div>
 
             <div class="image-container bg-white text-white hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 rounded-lg h-64 relative overflow-hidden">
