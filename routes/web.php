@@ -27,11 +27,12 @@ Route::controller(LoginRegisterController::class)->group(function () {
     Route::get("/login", "login")->name("login");
     Route::post("/authenticate", "authenticate")->name("authenticate");
     Route::get("/dashboard", "dashboard")->name("dashboard");
+    Route::get("/users", "users")->name("users");
     Route::get("/logout", "logout")->name("logout");
 });
 
 
-Route::get('/user', [LoginRegisterController::class, 'showUser']);
+Route::get('/user', [LoginRegisterController::class, 'showUser'])->name('showUser');
 Route::post('/delete-photo', [LoginRegisterController::class, 'deletePhoto'])->name('delete-photo');
 Route::get('/update-photo/{id}', [LoginRegisterController::class, 'updatePhoto'])->name('update-photo');
 Route::get('/edit-photo/{id}', [LoginRegisterController::class, 'editPhoto'])->name('edit-photo');

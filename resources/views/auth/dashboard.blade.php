@@ -1,8 +1,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{-- @vite(['resources/css/app.css','resources/js/app.js']) --}}
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --askar-100: #D8DEFF;
+            --askar-200: #6981FF;
+            --askar-300: #3D51BF;
+        }
+    </style>
 </head>
 
 
@@ -201,6 +207,14 @@
             <div class="col-span-3 flex bg-white p-10 rounded-lg">
                 <img src="" alt="">
             </div>
+            <form action="{{ route('users') }}" method="GET">
+                @csrf
+                <button class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 font-bold py-2 px-4 rounded-full" type="submit">Profile</button>
+            </form>
+            <form action="{{ route('kirim-email') }}" method="GET">
+                @csrf
+                <button class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 font-bold py-2 px-4 rounded-full" type="submit">Send Email</button>
+            </form>
                 <form action="{{ route('logout') }}" method="GET">
                     @csrf
                     <button class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 font-bold py-2 px-4 rounded-full" type="submit">LOGOUT</button>

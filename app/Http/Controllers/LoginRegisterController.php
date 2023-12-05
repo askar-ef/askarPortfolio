@@ -16,42 +16,13 @@ class LoginRegisterController extends Controller
     public function __construct()
     {
         $this->middleware("guest")->except([
-            "logout", "dashboard"
+            "logout", "dashboard", "users"
         ]);
     }
     public function register()
     {
         return view("auth.register");
     }
-
-
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         "name" => "required|string|max:250",
-    //         "email" => "required|email|max:250|unique:users",
-    //         "password" => "required|min:8|confirmed",
-    //         "photo" => "image|nullable|max:2000"
-    //     ]);
-
-    //     if ($request->hasFile('photo')) {
-    //         $filenameWithExt = $request->file('photo')->getClientOriginalName();
-    //         $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-    //         $extension = $request->file('photo')->getClientOriginalExtension();
-    //         $filenameSimpan = $filename . '_' . time() . $extension;
-    //         $path = $request->file('photo')->storeAs('photos', $filenameSimpan);
-    //     }
-    //     User::create([
-    //         "name" => $request->name,
-    //         "email" => $request->email,
-    //         "password" => Hash::make($request->password),
-    //         'photo' => $path
-    //     ]);
-    //     $cridentials = $request->only("email", "password");
-    //     Auth::attempt($cridentials);
-    //     $request->session()->regenerate();
-    //     return redirect()->route('kirim-verif')->withSuccess("you have successfully registered and logged in!");
-    // }
 
     // // intervension
     public function store(Request $request)
@@ -68,7 +39,7 @@ class LoginRegisterController extends Controller
             $filenameWithExt = $image->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $image->getClientOriginalExtension();
-            $filenameSimpan = $filename . '_' . time() . $extension;
+            $filenameSimpan = $filename . '_' . time() . '.' . $extension;
 
             // Simpan gambar asli
             $path = $image->storeAs('photos', $filenameSimpan);
@@ -100,7 +71,7 @@ class LoginRegisterController extends Controller
             $credentials = $request->only("email", "password");
             Auth::attempt($credentials);
             $request->session()->regenerate();
-            return redirect()->route("login")->withSuccess("Anda telah berhasil terdaftar dan masuk!");
+            return redirect()->route("kirim-verif")->withSuccess("Anda telah berhasil terdaftar dan masuk!");
         } else {
             // Jika terjadi kesalahan, arahkan ke halaman pendaftaran kembali
             return back()->withErrors([
@@ -108,8 +79,6 @@ class LoginRegisterController extends Controller
             ])->withInput();
         }
     }
-
-
 
     public function login()
     {
@@ -124,7 +93,7 @@ class LoginRegisterController extends Controller
         ]);
         if (Auth::attempt($cridentials)) {
             $request->session()->regenerate();
-            return redirect()->route("kirim-email")->withSuccess("You have successfully logged in!");
+            return redirect()->route("dashboard")->withSuccess("You have successfully logged in!");
         }
 
         return back()->withErrors([
@@ -132,11 +101,28 @@ class LoginRegisterController extends Controller
         ])->onlyInput("email");
     }
 
+    public function users()
+    {
+        $user = Auth::user();
+        return view("users", compact("user"));
+    }
+    // public function users()
+    // {
+    //     if (Auth::check()) {
+    //         $user = Auth::user(); // Mengambil pengguna yang saat ini masuk
+    //         return view("users", compact('user'));
+    //     }
+
+    //     return redirect()->route("login")->withErrors([
+    //         "email" => "Please login to access the dashboard.",
+    //     ])->onlyInput("email");
+    // }
+
     public function dashboard()
     {
         if (Auth::check()) {
             $user = Auth::user(); // Mengambil pengguna yang saat ini masuk
-            return view("users", compact('user'));
+            return view("auth.dashboard", compact('user'));
         }
 
         return redirect()->route("login")->withErrors([
@@ -150,25 +136,6 @@ class LoginRegisterController extends Controller
         $user = User::find($id);
         return view('user')->with('user', $user);
     }
-
-
-    //         return redirect()->route("dashboard")->withSuccess("Your profile photo has been deleted!");
-    //     } else {
-    //         return redirect()->route("login")->withErrors([
-    //             "email" => "Please login to access the dashboard.",
-    //         ])->onlyInput("email");
-    //     }
-    // }
-
-    // public function logout(Request $request)
-    // {
-    //     Auth::logout();
-    //     $request->session()->invalidate();
-    //     $request->session()->regenerateToken();
-    //     return redirect()->route("login")->withSuccess("You have logged out successfully!");
-    // }
-
-
 
     public function logout(Request $request)
     {
