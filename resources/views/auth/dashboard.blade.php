@@ -3,10 +3,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --askar-100: #D8DEFF;
-            --askar-200: #6981FF;
-            --askar-300: #3D51BF;
+        .image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            mask-image: linear-gradient(to bottom, transparent, black);
         }
     </style>
 </head>
@@ -19,7 +28,7 @@
                 <!-- Baris pertama, digabung menjadi 1 div -->
                 <div class="text-center pb-6">
                     <h1 class="text-4xl font-bold">Daffa Askar Fathin</h1>
-                    <h2 class="text-xl text-askar-200 pb-1">Software Engineering Student</h2>
+                    <h2 class="text-xl text-indigo-200 pb-1">Software Engineering Student</h2>
                     <h3 class="text-md text-gray-500 pb-4">Yogyakarta, Indonesia.</h3>
                     <p class="text-md text-gray-400">
                         Hey there, I'm Askar D Fathin, but you can just call me Askar. I'm a Jakarta-born explorer with a passion for all things tech and an insatiable desire to try new things. As the older brother in my family, I've always felt a sense of responsibility to set a good example and lead the way in everything I do. 🧶🐱
@@ -48,82 +57,99 @@
                     </div>
                 </div>
             </div>
-
             {{-- EXPERIENCES --}}
             <h1 class="col-span-3 pt-8 text-3xl font-semibold">Experiences</h1>
             {{-- PROJECT --}}
             <h2 class="col-span-3 pt-2 text-2xl font-medium text-gray-600">Projects</h2>
-            <div class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 rounded-lg h-400">
-                <p class="pl-2 pt-2">PPSMB PIONIR</p>
-                <p class="pl-2 pb-40">08/23</p>
 
-                <p class="text-right p-2">Co-Fasilitator</p>
-            </div>
-            <div class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 rounded-lg h-400">
-                <p class="pl-2 pt-2">SERIES</p>
-                <p class="pl-2 pb-40">08/23</p>
-
-                <p class="text-right p-2">Event Coordinator</p>
-            </div>
-            <div class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 rounded-lg h-400">
-                <p class="pl-2 pt-2">UGMSEC</p>
-                <p class="pl-2 pb-40">07/23</p>
-
-                <p class="text-right p-2">Creative Design</p>
+            <div class="image-container bg-white text-white hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 rounded-lg h-64 relative overflow-hidden">
+                <div class="mask bg-cover" style="background-image: url('https://www.shutterstock.com/image-illustration/mediocrity-painful-human-condition-pictured-600nw-2036037419.jpg'); filter: grayscale(100%) brightness(70%); transition: filter 0.3s ease;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(70%)';"></div>
+                <p class="absolute bottom-0 left-0 pl-4 pb-56">Broiler Monitoring</p>
+                <p class="absolute bottom-0 left-0 pl-4 pb-52">08/23</p>
+                <p class="absolute bottom-0 right-0 pr-2 pb-2">Project Manager</p>
             </div>
 
+            <div class="image-container bg-white text-white hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 rounded-lg h-64 relative overflow-hidden">
+                <div class="mask bg-cover" style="background-image: url('https://www.shutterstock.com/image-illustration/mediocrity-painful-human-condition-pictured-600nw-2036037419.jpg'); filter: grayscale(100%) brightness(70%); transition: filter 0.3s ease;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(70%)';"></div>
+                <p class="absolute bottom-0 left-0 pl-4 pb-56">JB Tower Interior</p>
+                <p class="absolute bottom-0 left-0 pl-4 pb-52">22</p>
+                <p class="absolute bottom-0 right-0 pr-2 pb-2">Lead Interior Designer</p>
+            </div>
+
+            <div class="image-container bg-white text-white hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 rounded-lg h-64 relative overflow-hidden">
+                <div class="mask bg-cover" style="background-image: url('https://www.shutterstock.com/image-illustration/mediocrity-painful-human-condition-pictured-600nw-2036037419.jpg'); filter: grayscale(100%) brightness(70%); transition: filter 0.3s ease;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(70%)';"></div>
+                <p class="absolute bottom-0 left-0 pl-4 pb-56">Goldcoast Interior</p>
+                <p class="absolute bottom-0 left-0 pl-4 pb-52">22</p>
+                <p class="absolute bottom-0 right-0 pr-2 pb-2">Lead Interior Designer</p>
+            </div>
             {{-- EVENT --}}
             <h2 class="col-span-3 pt-2 text-2xl font-medium text-gray-600">Events</h2>
-            <div class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 rounded-lg h-400">
-                <p class="pl-2 pt-2">PPSMB PIONIR</p>
-                <p class="pl-2 pb-40">08/23</p>
-
-                <p class="text-right p-2">Co-Fasilitator</p>
+            
+            <div class="image-container bg-white text-white hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 rounded-lg h-64 relative overflow-hidden">
+                <div class="mask bg-cover" style="background-image: url('https://www.shutterstock.com/image-illustration/mediocrity-painful-human-condition-pictured-600nw-2036037419.jpg'); filter: grayscale(100%) brightness(70%); transition: filter 0.3s ease;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(70%)';"></div>
+                <p class="absolute bottom-0 left-0 pl-4 pb-56">PPSMB PIONIR</p>
+                <p class="absolute bottom-0 left-0 pl-4 pb-52">08/23</p>
+                <p class="absolute bottom-0 right-0 pr-2 pb-2">Event Coordinator</p>
             </div>
-            <div class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 rounded-lg h-400">
-                <p class="pl-2 pt-2">SERIES</p>
-                <p class="pl-2 pb-40">08/23</p>
 
-                <p class="text-right p-2">Event Coordinator</p>
+            <div class="image-container bg-white text-white hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 rounded-lg h-64 relative overflow-hidden">
+                <div class="mask bg-cover" style="background-image: url('https://www.shutterstock.com/image-illustration/mediocrity-painful-human-condition-pictured-600nw-2036037419.jpg'); filter: grayscale(100%) brightness(70%); transition: filter 0.3s ease;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(70%)';"></div>
+                <p class="absolute bottom-0 left-0 pl-4 pb-56">LPIK</p>
+                <p class="absolute bottom-0 left-0 pl-4 pb-52">08/23</p>
+                <p class="absolute bottom-0 right-0 pr-2 pb-2">Design Creative Coordinator</p>
             </div>
-            <div class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 rounded-lg h-400">
-                <p class="pl-2 pt-2">UGMSEC</p>
-                <p class="pl-2 pb-40">07/23</p>
 
-                <p class="text-right p-2">Creative Design</p>
+            <div class="image-container bg-white text-white hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 rounded-lg h-64 relative overflow-hidden">
+                <div class="mask bg-cover" style="background-image: url('https://www.shutterstock.com/image-illustration/mediocrity-painful-human-condition-pictured-600nw-2036037419.jpg'); filter: grayscale(100%) brightness(70%); transition: filter 0.3s ease;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(70%)';"></div>
+                <p class="absolute bottom-0 left-0 pl-4 pb-56">SEASAC</p>
+                <p class="absolute bottom-0 left-0 pl-4 pb-52">08/23</p>
+                <p class="absolute bottom-0 right-0 pr-2 pb-2">Design Creative</p>
             </div>
-            <div class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 rounded-lg h-400">
-                <p class="pl-2 pt-2">SEASAC</p>
-                <p class="pl-2 pb-40">10/23</p>
 
-                <p class="text-right p-2">Creative Design</p>
+            <div class="image-container bg-white text-white hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 rounded-lg h-64 relative overflow-hidden">
+                <div class="mask bg-cover" style="background-image: url('https://www.shutterstock.com/image-illustration/mediocrity-painful-human-condition-pictured-600nw-2036037419.jpg'); filter: grayscale(100%) brightness(70%); transition: filter 0.3s ease;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(70%)';"></div>
+                <p class="absolute bottom-0 left-0 pl-4 pb-56">SERIES</p>
+                <p class="absolute bottom-0 left-0 pl-4 pb-52">08/23</p>
+                <p class="absolute bottom-0 right-0 pr-2 pb-2">Event Coordinator</p>
             </div>
-            <div class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 rounded-lg h-400">
-                <p class="pl-2 pt-2">LPIK</p>
-                <p class="pl-2 pb-40">10/23</p>
 
-                <p class="text-right p-2">Creative Design</p>
+            <div class="image-container bg-white text-white hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 rounded-lg h-64 relative overflow-hidden">
+                <div class="mask bg-cover" style="background-image: url('https://www.shutterstock.com/image-illustration/mediocrity-painful-human-condition-pictured-600nw-2036037419.jpg'); filter: grayscale(100%) brightness(70%); transition: filter 0.3s ease;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(70%)';"></div>
+                <p class="absolute bottom-0 left-0 pl-4 pb-56">UGMSEC</p>
+                <p class="absolute bottom-0 left-0 pl-4 pb-52">08/23</p>
+                <p class="absolute bottom-0 right-0 pr-2 pb-2">Design Creative</p>
             </div>
+
+            <div class="image-container bg-white text-white hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 rounded-lg h-64 relative overflow-hidden">
+                <div class="mask bg-cover" style="background-image: url('https://www.shutterstock.com/image-illustration/mediocrity-painful-human-condition-pictured-600nw-2036037419.jpg'); filter: grayscale(100%) brightness(70%); transition: filter 0.3s ease;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(70%)';"></div>
+                <p class="absolute bottom-0 left-0 pl-4 pb-56">PPSMB PALAPA</p>
+                <p class="absolute bottom-0 left-0 pl-4 pb-52">08/23</p>
+                <p class="absolute bottom-0 right-0 pr-2 pb-2">Wreksodiningrat 10A DDD Coordinator</p>
+            </div>
+
 
             {{-- COMPETITION --}}
             <h2 class="col-span-3 pt-2 text-2xl font-medium text-gray-600">Competitions</h2>
-            <div class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 rounded-lg h-400">
-                <p class="pl-2 pt-2">POVVAF Essay Competition</p>
-                <p class="pl-2 pb-40">09/23</p>
-
-                <p class="text-right p-2">3rd Winner</p>
+            
+            <div class="image-container bg-white text-white hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 rounded-lg h-64 relative overflow-hidden">
+                <div class="mask bg-cover" style="background-image: url('https://www.shutterstock.com/image-illustration/mediocrity-painful-human-condition-pictured-600nw-2036037419.jpg'); filter: grayscale(100%) brightness(70%); transition: filter 0.3s ease;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(70%)';"></div>
+                <p class="absolute bottom-0 left-0 pl-4 pb-56">POVVAF Essay Competition</p>
+                <p class="absolute bottom-0 left-0 pl-4 pb-52">09/23</p>
+                <p class="absolute bottom-0 right-0 pr-2 pb-2">3rd Winner</p>
             </div>
-            <div class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 rounded-lg h-400">
-                <p class="pl-2 pt-2">TGES Essay Competition</p>
-                <p class="pl-2 pb-40">04/23</p>
 
-                <p class="text-right p-2">1st Winner</p>
+            <div class="image-container bg-white text-white hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 rounded-lg h-64 relative overflow-hidden">
+                <div class="mask bg-cover" style="background-image: url('https://www.shutterstock.com/image-illustration/mediocrity-painful-human-condition-pictured-600nw-2036037419.jpg'); filter: grayscale(100%) brightness(70%); transition: filter 0.3s ease;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(70%)';"></div>
+                <p class="absolute bottom-0 left-0 pl-4 pb-56">TGES Essay Competition</p>
+                <p class="absolute bottom-0 left-0 pl-4 pb-52">04/23</p>
+                <p class="absolute bottom-0 right-0 pr-2 pb-2">1st Winner</p>
             </div>
-            <div class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 rounded-lg h-400">
-                <p class="pl-2 pt-2">BIMWIKA AWARDS</p>
-                <p class="pl-2 pb-40">21</p>
 
-                <p class="text-right p-2">4th Position</p>
+            <div class="image-container bg-white text-white hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 rounded-lg h-64 relative overflow-hidden">
+                <div class="mask bg-cover" style="background-image: url('https://www.shutterstock.com/image-illustration/mediocrity-painful-human-condition-pictured-600nw-2036037419.jpg'); filter: grayscale(100%) brightness(70%); transition: filter 0.3s ease;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(70%)';"></div>
+                <p class="absolute bottom-0 left-0 pl-4 pb-56">BIMWIKA AWARDS</p>
+                <p class="absolute bottom-0 left-0 pl-4 pb-52">21</p>
+                <p class="absolute bottom-0 right-0 pr-2 pb-2">1st Winner</p>
             </div>
 
             {{-- JOURNEY --}}
@@ -194,30 +220,55 @@
 
             <h1 class="col-span-3 pt-8 text-3xl font-semibold">Skills</h1>
             <h2 class="col-span-3 pt-2 text-2xl font-medium text-gray-600">Architecture and Civil</h2>
-            <div class="col-span-3 flex bg-white p-10 rounded-lg">
-                <img src="" alt="">
+            <div class="col-span-3 flex bg-white p-5 rounded-lg font-medium text-gray-400">
+                <ul>
+                    <li>AutoCAD</li>
+                    <li>SketchUp</li>
+                    <li>Revit</li>
+                    <li>OpenRoad</li>
+                    <li>OpenBridge</li>
+                    <li>Vray</li>
+                    <li>Lumion</li>
+                    <li>Enscape</li>
+                </ul>
             </div>
 
             <h2 class="col-span-3 pt-2 text-2xl font-medium text-gray-600">Programming Language</h2>
-            <div class="col-span-3 flex bg-white p-10 rounded-lg">
-                <img src="" alt="">
+            <div class="col-span-3 flex bg-white p-5 rounded-lg font-medium text-gray-400">
+                <ul>
+                    <li>Python</li>
+                    <li>Java</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>PHP</li>
+                    <li>Laravel</li>
+                    <li>Bootstrap</li>
+                    <li>TailwindCSS</li>
+                    <li>Kotlin</li>
+                    <li>Swift</li>
+                </ul>
             </div>
 
             <h2 class="col-span-3 pt-2 text-2xl font-medium text-gray-600">Design and Management</h2>
-            <div class="col-span-3 flex bg-white p-10 rounded-lg">
-                <img src="" alt="">
+            <div class="col-span-3 flex bg-white p-5 rounded-lg font-medium text-gray-400">
+                <ul>
+                    <li>Figma</li>
+                    <li>Canva</li>
+                    <li>Trello</li>
+                </ul>
             </div>
             <form action="{{ route('users') }}" method="GET">
                 @csrf
-                <button class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 font-bold py-2 px-4 rounded-full" type="submit">Profile</button>
+                <button class="bg-white text-gray-500 hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 font-bold py-2 px-4 rounded-full" type="submit">Profile</button>
             </form>
             <form action="{{ route('kirim-email') }}" method="GET">
                 @csrf
-                <button class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 font-bold py-2 px-4 rounded-full" type="submit">Send Email</button>
+                <button class="bg-white text-gray-500 hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 font-bold py-2 px-4 rounded-full" type="submit">Send Email</button>
             </form>
                 <form action="{{ route('logout') }}" method="GET">
                     @csrf
-                    <button class="bg-white text-gray-500 hover:bg-askar-100 hover:text-askar-300 transition-all duration-200 font-bold py-2 px-4 rounded-full" type="submit">LOGOUT</button>
+                    <button class="bg-white text-gray-500 hover:bg-indigo-100 hover:text-indigo-300 transition-all duration-200 font-bold py-2 px-4 rounded-full" type="submit">Logout</button>
                 </form>
             </div>
         </div>
