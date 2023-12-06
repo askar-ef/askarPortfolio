@@ -31,13 +31,10 @@ Route::controller(LoginRegisterController::class)->group(function () {
     Route::get("/logout", "logout")->name("logout");
 });
 
-
 Route::get('/user', [LoginRegisterController::class, 'showUser'])->name('showUser');
 Route::post('/delete-photo', [LoginRegisterController::class, 'deletePhoto'])->name('delete-photo');
 Route::get('/update-photo/{id}', [LoginRegisterController::class, 'updatePhoto'])->name('update-photo');
 Route::get('/edit-photo/{id}', [LoginRegisterController::class, 'editPhoto'])->name('edit-photo');
-
-// Route::get('/pindah', [LoginRegisterController::class, 'pindah'])->name('pindah');
 
 
 Route::controller(SendEmailController::class)->group(function () {

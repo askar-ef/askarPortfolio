@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-header">Resize Photo</div>
             <div class="card-body">
-                <form action="{{ route('resizeImage', $user) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('resize', $user) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="photo" value="{{ $user->photo }}">
                     <div class="mb-3 row">

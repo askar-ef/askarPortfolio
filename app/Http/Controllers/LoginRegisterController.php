@@ -42,17 +42,17 @@ class LoginRegisterController extends Controller
             $filenameSimpan = $filename . '_' . time() . '.' . $extension;
 
             // Simpan gambar asli
-            $path = $image->storeAs('photos', $filenameSimpan);
+            $path = $image->storeAs($filenameSimpan);
 
             // Buat thumbnail (300x200)
             $thumbnail = Image::make($image);
-            $thumbnail->fit(300, 200);
-            Storage::disk('public')->put('thumbnails/' . $filenameSimpan, $thumbnail->stream());
+            $thumbnail->fit(150, 75);
+            Storage::disk('public')->put('photos/thumbnails/' . $filenameSimpan, $thumbnail->stream());
 
             // Buat square (150x150)
             $square = Image::make($image);
             $square->fit(150, 150);
-            Storage::disk('public')->put('squares/' . $filenameSimpan, $square->stream());
+            Storage::disk('public')->put('photos/squares/' . $filenameSimpan, $square->stream());
         } else {
             // Jika tidak ada gambar yang diunggah, set $path ke null
             $path = null;
@@ -106,17 +106,6 @@ class LoginRegisterController extends Controller
         $user = Auth::user();
         return view("users", compact("user"));
     }
-    // public function users()
-    // {
-    //     if (Auth::check()) {
-    //         $user = Auth::user(); // Mengambil pengguna yang saat ini masuk
-    //         return view("users", compact('user'));
-    //     }
-
-    //     return redirect()->route("login")->withErrors([
-    //         "email" => "Please login to access the dashboard.",
-    //     ])->onlyInput("email");
-    // }
 
     public function dashboard()
     {

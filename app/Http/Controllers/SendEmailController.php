@@ -98,8 +98,8 @@ class SendEmailController extends Controller
         $user = User::find($id);
         if ($user->photo) {
             Storage::disk('public')->delete($user->photo);
-            Storage::disk('public')->delete('thumbnails/' . $user->photo);
-            Storage::disk('public')->delete('squares/' . $user->photo);
+            Storage::disk('public')->delete('photos/thumbnails/' . $user->photo);
+            Storage::disk('public')->delete('photos/squares/' . $user->photo);
 
             $user->photo = null;
             $user->save();
@@ -130,13 +130,13 @@ class SendEmailController extends Controller
         if ($request->hasFile('photo')) {
             if ($user->photo) {
                 Storage::disk('public')->delete($user->photo);
-                Storage::disk('public')->delete('thumbnails/' . $user->photo);
-                Storage::disk('public')->delete('squares/' . $user->photo);
+                Storage::disk('public')->delete('photos/thumbnails/' . $user->photo);
+                Storage::disk('public')->delete('photos/squares/' . $user->photo);
             }
 
             $image = $request->file('photo');
             $filename = uniqid() . '.' . $image->getClientOriginalExtension();
-            $path = $image->storeAs('photos/original', $filename, 'public');
+            $path = $image->storeAs($filename);
 
             $this->createThumbnailAndSquare($image, $filename);
 
@@ -152,8 +152,8 @@ class SendEmailController extends Controller
         $thumbnail = Image::make($image)->fit(300, 200);
         $square = Image::make($image)->fit(150, 150);
 
-        Storage::disk('public')->put('thumbnails/' . $filename, $thumbnail->stream());
-        Storage::disk('public')->put('squares/' . $filename, $square->stream());
+        Storage::disk('public')->put('photos/thumbnails/' . $filename, $thumbnail->stream());
+        Storage::disk('public')->put('photos/squares/' . $filename, $square->stream());
     }
 
 

@@ -24,6 +24,7 @@
 
                         <h2 class="mt-3">{{ $user->name }}</h2>
                         <p>{{ $user->email }}</p>
+
                         <a href="{{ route('edit-photo', $user->id) }}" class="btn btn-primary">Edit Profile</a>
 
                         <form method="POST" action="{{ route('delete-photo', $user->id) }}" class="mt-3">
@@ -31,9 +32,33 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete Profile Photo</button>
                         </form>
-                        
                     </div>
                 </div>
+                
+
+                <div class="flex justify-center items-center">
+                    <div class="bg-white p-8 rounded shadow-md">
+                        <table class="w-full border">
+                            <tr class="border-b">
+                                <td class="py-2 px-4 text-center">Normal</td>
+                                <td class="py-2 px-4 text-center">Square</td>
+                                <td class="py-2 px-4 text-center">Thumbnail</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 text-center">
+                                    <img src="{{ asset('storage/' . $user->photo) }}" class="mx-auto img-fluid" alt="User Photo" width="200">
+                                </td>
+                                <td class="py-2 px-4 text-center">
+                                    <img src="{{ asset('storage/photos/squares/' . $user->photo) }}" class="mx-auto img-fluid" alt="User Photo" width="200">
+                                </td>
+                                <td class="py-2 px-4 text-center">
+                                    <img src="{{ asset('storage/photos/thumbnails/' . $user->photo) }}" class="mx-auto img-fluid" alt="User Photo" width="200">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+        
             </div>
         </div>
     </div>
